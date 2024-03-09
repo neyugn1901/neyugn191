@@ -21,6 +21,8 @@ public class ServerGUI extends JFrame {
     private PrintWriter out;
     private Socket clientSocket;
 
+    private String studentID = "1571020191"; 
+
     public ServerGUI() {
         setTitle("Chat Application - Server");
         setSize(700, 400);
@@ -31,7 +33,7 @@ public class ServerGUI extends JFrame {
 
         JPanel chatPanel = new JPanel();
         chatPanel.setLayout(new BorderLayout());
-        chatPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+        chatPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
 
         chatArea = new JTextArea();
         chatArea.setEditable(false);
@@ -100,7 +102,7 @@ public class ServerGUI extends JFrame {
                             } else if (message.startsWith("FILE:")) {
                                 receiveFile();
                             } else {
-                                chatArea.append("Client: " + message + "\n");
+                                chatArea.append("Client: " + message + " (Student ID: " + studentID + ")\n");
                             }
                         }
                     } catch (IOException e) {
@@ -116,8 +118,8 @@ public class ServerGUI extends JFrame {
 
     private void sendMessage() {
         String message = messageField.getText();
-        chatArea.append("Server: " + message + "\n");
-        out.println(message);
+        chatArea.append("Server: " + message + " (Student ID: " + studentID + ")\n");
+        out.println(message + " (Student ID: " + studentID + ")");
         messageField.setText("");
     }
 
@@ -169,7 +171,7 @@ public class ServerGUI extends JFrame {
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            chatArea.append("You sent an image: " + selectedFile.getName() + "\n");
+            chatArea.append("You sent an image: " + selectedFile.getName() + " (Student ID: " + studentID + ")\n");
 
             try {
                 OutputStream outputStream = clientSocket.getOutputStream();
@@ -186,7 +188,7 @@ public class ServerGUI extends JFrame {
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            chatArea.append("You sent a file: " + selectedFile.getName() + "\n");
+            chatArea.append("You sent a file: " + selectedFile.getName() + " (Student ID: " + studentID + ")\n");
             out.println("FILE:" + selectedFile.getName());
 
             try {
