@@ -39,7 +39,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
     
     private javax.swing.JButton btnCreateGroup; // Thêm dòng này
 
-    //constructeur
+    
     public ChatView(String name,String autorization,InterfaceServer server) {
         initComponents();
         btnCreateGroup = new javax.swing.JButton();
@@ -50,14 +50,14 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
     }
 
             private void btnCreateGroupActionPerformed(ActionEvent evt) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                throw new UnsupportedOperationException("Not supported yet."); 
             }
         });
 
         this.server = server;
         this.name = name;
         
-        //detecter le group de client: simple user ou admin pour bourser a l'admin les permission (activer,block,supprimer) clients
+        
         if(autorization.equals("Administrator")){
             System.out.print(autorization);
             listConnect.setComponentPopupMenu(jPopupMenu1);
@@ -71,12 +71,12 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         jPanel1.setLayout(new GridLayout(100,1));
         jPanel1.setBorder(new EmptyBorder(5, 10, 10, 10));
         
-        //questionneé le client avant de cloture chat, si oui on supprimer le dans la liste des client
+        
         this.addWindowListener(new java.awt.event.WindowAdapter() {    
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(new JFrame(), 
-                    "Are you sure you want to close this chat ?", "Close chat?", 
+                    "Đóng đoạn chat ?", "Close?", 
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
                     try {
@@ -91,13 +91,13 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
             }
         });
         
-        //un placeholder sur le textfield d'envoyer message
+        
         inputMsg.setForeground(Color.GRAY);
-        inputMsg.setText("Enter your Message ...");
+        inputMsg.setText("nhập tin nhắn ...");
         inputMsg.addFocusListener(new FocusListener() {
         @Override
          public void focusGained(FocusEvent e) {
-            if (inputMsg.getText().equals("Enter your Message ...")) {
+            if (inputMsg.getText().equals("nhập tin nhắn ...")) {
                 inputMsg.setText("");
                 inputMsg.setForeground(Color.BLACK);
             }
@@ -106,12 +106,12 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
          public void focusLost(FocusEvent e) {
             if (inputMsg.getText().isEmpty()) {
                 inputMsg.setForeground(Color.GRAY);
-                inputMsg.setText("Enter your Message ...");
+                inputMsg.setText("nhập tin nhắn ...");
             }
         }
         });
         
-        //une liste qui contient le nom des clients connectes
+        
         listClients = new Vector<>();
         listConnect.setListData(listClients);
         
@@ -121,7 +121,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
             System.out.println("Error: " + ex.getMessage());
         }
         
-        //timer pour a chaque 20s va actualiser la liste des clients connectes 
+        
         Timer minuteur = new Timer();
         TimerTask tache = new TimerTask() {
             @Override
@@ -215,7 +215,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         inputMsg.getAccessibleContext().setAccessibleName("Enter your Message ...");
 
         btnSend.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnSend.setText("Send");
+        btnSend.setText("Gửi");
         btnSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +231,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         jScrollPane3.setViewportView(listMessage);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jLabel2.setText("Connected Clients");
+        jLabel2.setText("Danh bạ");
 
         jButton1.setText("Refresh");
         jButton1.setActionCommand("");
@@ -243,6 +243,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/remote/client/file-upload.png"))); // NOI18N
+        jButton3.setText("Images or Files");
         jButton3.setToolTipText("upload File");
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
@@ -272,7 +273,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         jScrollPane4.setViewportView(jPanel1);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Shared Files");
+        jLabel1.setText("Chia sẻ files");
 
         jButton2.setText("Tạo nhóm");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -287,28 +288,21 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane4)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
-                            .addGap(27, 27, 27))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1))
-                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel2))
                     .addComponent(jScrollPane1)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                    .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -324,16 +318,24 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
                         .addComponent(jButton1))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 31, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -341,27 +343,27 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    //action sur la bouton "send" button d'envoi le message, verifier si le message est vide ou non avant l'envoyer
+    
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         if(!inputMsg.getText().equals("")){
-            if(!inputMsg.getText().equals("Enter you Message ...")){
+            if(!inputMsg.getText().equals("nhập tin nhắn ...")){
                 client.sendMessage(listConnect.getSelectedValuesList());
                 inputMsg.setText("");
             }else{
-            JOptionPane.showMessageDialog(this,"Please insert something to set your message","Alert",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Hãy nhập tin nhắn","Alert",JOptionPane.WARNING_MESSAGE);
         }
         }else{
-            JOptionPane.showMessageDialog(this,"Please insert something to send your message","Alert",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Hãy nhập tin nhắn","Alert",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnSendActionPerformed
 
-    //action sur la bouton "refresh" button d'actualisation de la liste des clients (utilisation de thread)
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Thread thread = new Thread(this);
         thread.start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    //action sur le popup menu "supprimer clients"
+   
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         try {
             server.removeClient(listConnect.getSelectedValuesList());
@@ -370,7 +372,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         } 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    //action sur le popup menu "blocker clients"
+   
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         try {
             server.blockClient(listConnect.getSelectedValuesList());
@@ -379,7 +381,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    //action sur le popup menu "activer clients"
+    
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         try {
             server.reactiveClient(listConnect.getSelectedValuesList());
@@ -388,7 +390,7 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    ////action sur le button "envoyer fichier", premierement en verifié est ce que ce fichier verifié les extensions disponnibles avant d'envoyer
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         int returnValue = jfc.showOpenDialog(null);
@@ -430,12 +432,12 @@ public class ChatView extends javax.swing.JFrame implements Runnable{
                     System.out.println("Error: " + ex.getMessage());
                 }
 
-                JLabel jfile = new JLabel(file.getName() + " Uploaded ...");
+                JLabel jfile = new JLabel(file.getName() + " Đã tải tệp lên ...");
                 jPanel1.add(jfile);
                 jPanel1.repaint();
                 jPanel1.revalidate();
             }else{
-                JOptionPane.showMessageDialog(this,"You can only upload file have an extension like: xml,exe,jpg,png,jpeg,pdf,c,cpp,jar,java,txt,php ","Alert",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Chỉ có thể tải các tệp có định dạng: xml,exe,jpg,png,jpeg,pdf,c,cpp,jar,java,txt,php ","Alert",JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
